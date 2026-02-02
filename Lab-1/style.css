@@ -95,3 +95,34 @@ main.container{
   text-align: center;
 }
 .weekdays > div{ text-align:center; }
+
+/* Uniform day cells */
+.days{
+  grid-auto-rows: var(--cell-h);  /* every cell same height */
+}
+.days > .day{
+  height: 100%;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, transform .06s ease;
+}
+.days > .day:hover{
+  background: #ffffff;
+  color: var(--today);
+}
+.days > .day:active{ transform: translateY(1px) scale(.99); }
+.days > .day:focus-visible{ outline: 2px solid var(--today); outline-offset: 2px; }
+
+/* Inside a day cell we only show the number (clean mock look) */
+.days > .day .date{ font-weight: 700; }
+.days > .day .titles{ display: none; }   /* details stay in the aside */
+
+/* Out-of-month days and Today */
+.days > .day.fade{ color: #555; }
+.days > .day.today{
+  background: var(--today);
+  color: #fff;
+}
