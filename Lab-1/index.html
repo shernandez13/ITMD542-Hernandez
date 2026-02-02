@@ -26,5 +26,23 @@
       </form>
     </nav>
   </header>
+
+
+  <main class="container" aria-label="Calendar application">
+    <section class="calendar" role="region" aria-labelledby="month-year">
+      <div class="header">
+        <button id="prev" class="btn" aria-label="Previous month"><i class="fa-solid fa-arrow-left"></i></button>
+        <h2 id="month-year" aria-live="polite"></h2>
+        <button id="next" class="btn" aria-label="Next month"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+      <div class="weekdays" aria-hidden="true">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+
+      <div class="days" id="days" role="grid" aria-readonly="true"></div>
+    </section>
+    
+  </main>
 </body>
 </html>
