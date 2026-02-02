@@ -61,3 +61,39 @@ document.addEventListener('DOMContentLoaded', () => {
       daysContainer.appendChild(d);
     }
 
+    // --- Current month days ---
+    for (let dayNum = 1; dayNum <= daysInMonth; dayNum++) {
+      const cellDate = new Date(year, month, dayNum);
+      const cellStr  = ymd(cellDate);
+
+      const cell = document.createElement('div');
+      cell.className = 'day';
+      cell.tabIndex = 0;
+
+      const dateEl = document.createElement('div');
+      dateEl.className = 'date';
+      dateEl.textContent = dayNum;
+      cell.appendChild(dateEl);
+
+      // Real "today" hint (ring only)
+      if (
+        dayNum === today.getDate() &&
+        month  === today.getMonth() &&
+        year   === today.getFullYear()
+      ) {
+        cell.classList.add('is-today');
+      }
+
+      // Selected highlight (orange)
+      if (cellStr === selectedYMD) {
+        cell.classList.add('selected');
+      }
+
+      // Filter events for this exact date
+      const dayEvents = EVENTS.filter(e => {
+        if (e.date !== cellStr) return false;
+        if (!selectedCats.has(e.category)) return false;
+        if (q && e.title.toLowerCase().indexOf(q) === -1) return false;
+        return true;
+      });
+
