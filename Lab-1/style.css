@@ -1,3 +1,23 @@
+/* ---------- Design tokens ---------- */
+:root{
+  /* colors */
+  --bg: #2f2f2f;
+  --panel: #111111;
+  --ink: #ffffff;
+  --muted: #9ca3af;
+  --line: #202020;
+  --today: #ff6a2a;
+
+  /* layout */
+  --radius: 14px;
+  --shadow: 0 0 30px #222222;
+
+  /* calendar sizing */
+  --cal-width: 640px;   /* try 300–760px */
+  --cell-h: 58px;       /* height of each day cell; increase to make it longer */
+  --gap: 12px;
+}
+
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
