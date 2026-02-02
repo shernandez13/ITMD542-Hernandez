@@ -126,3 +126,35 @@ main.container{
   background: var(--today);
   color: #fff;
 }
+
+/* ---------- Aside (selected-day events) ---------- */
+.aside{
+  background: rgba(0,0,0,.28);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+#dayLabel{ margin-top:0; margin-bottom:10px; }
+.events{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+.events li{
+  padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#0f0f0f;
+  color: var(--ink);
+}
+
+/* ---------- Footer ---------- */
+footer.container{ margin-top: 30px; opacity:.85; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 520px){
+  :root{ --cal-width: 100%; --cell-h: 52px; }
+  .calendar{ padding: 16px; }
+  #month-year{ font-size: 20px; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .btn, .days > .day{ transition: none; }
+}
+
+/* --- Selection & today ring (add at end) --- */
