@@ -19,3 +19,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const da = String(dd.getDate()).padStart(2, '0');
     return `${y}-${m}-${da}`;
   };
+
+  // Demo events
+  const EVENTS = [
+    { date: '2025-10-18', title: 'Intro to JS Workshop', category: 'workshop' },
+    { date: '2025-10-20', title: 'Basketball Open Gym',  category: 'sports'   },
+    { date: '2025-10-21', title: 'Robotics Club Meetup', category: 'club'     },
+    { date: '2025-10-21', title: 'CSS Tricks Workshop',  category: 'workshop' },
+    { date: '2025-11-03', title: 'Club Fair',            category: 'club'     }
+  ];
+
+  // ----- State -----
+  let currentDate = new Date();
+  // Default selection = today (orange at first load)
+  let selectedYMD = ymd(today);
+
+  function renderCalendar(date) {
+    const year  = date.getFullYear();
+    const month = date.getMonth();
+
+    // Header
+    monthYear.textContent = `${months[month]} ${year}`;
+    daysContainer.innerHTML = '';
+
+    // Active filters
+    const formData = new FormData(filtersForm);
+    const selectedCats = new Set(formData.getAll('category'));
+    const q = (qInput && qInput.value ? qInput.value : '').trim().toLowerCase();
+
+    // Month metrics
+    const firstDayOfMonth = new Date(year, month, 1).getDay();           // 0..6
+    const daysInMonth     = new Date(year, month + 1, 0).getDate();      // 28..31
+
+    // --- Leading padding (prev month) ---
+    const prevMonthLastDay = new Date(year, month, 0).getDate();
+    for (let i = firstDayOfMonth; i > 0; i--) {
+      const d = document.createElement('div');
+      d.className = 'day fade';
+      d.tabIndex = 0;
+      d.innerHTML = `<div class="date">${prevMonthLastDay - i + 1}</div>`;
+      daysContainer.appendChild(d);
+    }
+
