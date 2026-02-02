@@ -24,3 +24,32 @@ main.container{
 @media (max-width: 900px){
   main.container{ grid-template-columns: 1fr; }
 }
+
+/* ---------- Filters/search (kept from your HTML) ---------- */
+.filters{
+  display:flex; flex-wrap:wrap; align-items:center; gap: 12px;
+  background: rgba(0,0,0,.30);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+.filters fieldset{ border:0; margin:0; padding:0; display:flex; gap:10px; flex-wrap:wrap; }
+.filters label{ display:flex; gap:6px; align-items:center; }
+.search input{
+  padding:8px 10px; border-radius:10px; border:1px solid var(--line);
+  background:#0b0b0b; color:var(--ink);
+}
+
+/* ---------- Calendar card ---------- */
+.calendar{
+  width: min(100%, var(--cal-width));
+  margin-inline: auto;
+  background: var(--panel);
+  color: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  border: 1px solid var(--line);
+}
+
