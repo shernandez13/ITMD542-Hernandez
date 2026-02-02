@@ -6,3 +6,25 @@
   <title>Calendar App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<body>
+  <header class="container">
+    <h1>Campus Events Calendar</h1>
+    <p class="subtle">Browse months and filter events.</p>
+    <nav aria-label="Event filters">
+      <form id="filters" class="filters" role="search">
+        <fieldset>
+          <legend>Categories</legend>
+          <label><input type="checkbox" name="category" value="workshop" checked> Workshop</label>
+          <label><input type="checkbox" name="category" value="sports" checked> Sports</label>
+          <label><input type="checkbox" name="category" value="club" checked> Club</label>
+        </fieldset>
+        <label class="search">
+          <span class="sr-only">Search titles</span>
+          <input id="q" type="search" placeholder="Search titles…" />
+        </label>
+      </form>
+    </nav>
+  </header>
+</body>
+</html>
