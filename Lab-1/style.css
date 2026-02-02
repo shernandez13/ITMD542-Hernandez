@@ -53,3 +53,45 @@ main.container{
   border: 1px solid var(--line);
 }
 
+/* Month header (arrows + title) */
+.calendar .header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 6px 4px 12px;
+}
+#month-year{
+  margin:0;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: .2px;
+}
+.btn{
+  background: transparent;
+  color: #fff;
+  border: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color .15s ease, transform .06s ease;
+}
+.btn:hover{ background:#1a1a1a; }
+.btn:active{ transform: translateY(1px) scale(.99); }
+.btn:focus-visible{ outline:2px solid var(--today); outline-offset:2px; }
+
+/* Weekdays + days grid */
+.weekdays,
+.days{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 0;            /* compact columns like the mock */
+  row-gap: var(--gap);      /* vertical rhythm */
+}
+.weekdays{
+  padding: 6px 0 8px;
+  opacity: .95;
+  font-weight: 700;
+  text-align: center;
+}
+.weekdays > div{ text-align:center; }
