@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calendar App</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 
 <body>
@@ -42,7 +43,15 @@
 
       <div class="days" id="days" role="grid" aria-readonly="true"></div>
     </section>
-    
+
+    <aside aria-label="Selected day events" class="aside">
+      <h3 id="dayLabel">Select a day</h3>
+      <ul id="eventList" class="events"></ul>
+    </aside>   
   </main>
+
+  <footer class="container"><small>© 2025 Stephanie Hernandez • HTML, CSS & JavaScript</small></footer>
+  <script src="script.js" defer></script>
+
 </body>
 </html>
