@@ -97,3 +97,81 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
       });
 
+     // Interactions
+      function selectThisDay() {
+        const prevSel = daysContainer.querySelector('.day.selected');
+        if (prevSel) prevSel.classList.remove('selected');
+        selectedYMD = cellStr;
+        cell.classList.add('selected');
+        showDay(cellDate, dayEvents);
+      }
+
+      cell.addEventListener('click', selectThisDay);
+      cell.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectThisDay(); }
+      });
+
+      daysContainer.appendChild(cell);
+    }
+
+    // --- Trailing padding (next month) ---
+    // Number of cells already placed in the row after finishing the month:
+    const usedCellsThisRow = (firstDayOfMonth + daysInMonth) % 7;
+    const trailing = usedCellsThisRow === 0 ? 0 : (7 - usedCellsThisRow);
+    for (let i = 1; i <= trailing; i++) {
+      const d = document.createElement('div');
+      d.className = 'day fade';
+      d.tabIndex = 0;
+      d.innerHTML = `<div class="date">${i}</div>`;
+      daysContainer.appendChild(d);
+    }
+
+    // Ensure aside matches current selected day (if visible & matches filters)
+    if (selectedYMD) {
+      const selParts = selectedYMD.split('-').map(n => parseInt(n, 10));
+      const selDateObj = new Date(selParts[0], selParts[1]-1, selParts[2]);
+
+      const selectedEvents = EVENTS.filter(e => {
+        if (e.date !== selectedYMD) return false;
+        if (!selectedCats.has(e.category)) return false;
+        if (q && e.title.toLowerCase().indexOf(q) === -1) return false;
+        return true;
+      });
+
+      // Only update the aside if the selected day is within the shown month grid
+      const isInThisView =
+        selDateObj.getMonth() === month && selDateObj.getFullYear() === year;
+      if (isInThisView) showDay(selDateObj, selectedEvents);
+      else dayLabel.textContent = `${months[month]} ${year}`;
+    }
+  }
+
+  function showDay(dateObj, dayEvents) {
+    dayLabel.textContent = dateObj.toDateString();
+    eventList.innerHTML = '';
+    if (!dayEvents || dayEvents.length === 0) {
+      eventList.innerHTML = '<li>No events</li>';
+      return;
+    }
+    for (const e of dayEvents) {
+      const li = document.createElement('li');
+      li.textContent = `${e.title} — ${e.category}`;
+      eventList.appendChild(li);
+    }
+  }
+
+  // --- Nav & filters ---
+  prevButton.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate);
+  });
+  nextButton.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate);
+  });
+  filtersForm.addEventListener('change', () => renderCalendar(currentDate));
+  if (qInput) qInput.addEventListener('input', () => renderCalendar(currentDate));
+
+  // First render
+  renderCalendar(currentDate);
+});
